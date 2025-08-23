@@ -1,0 +1,45 @@
+{
+    "name": "@ohos/accesscontrol_cangjie_wrapper",
+    "description": "cangjie access_token api",
+    "version": "6.0",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "base/accesscontrol/accesscontrol_cangjie_wrapper"
+    },
+    "dirs":{},
+    "scripts": {},
+    "component": {
+      "name": "accesscontrol_cangjie_wrapper",
+      "subsystem": "accesscontrol",
+      "syscap": [
+        "SystemCapability.Security.AccessToken"
+      ],
+      "features": [],
+      "adapted_system_type": [
+          "standard"
+        ],
+      "hisysevent_config": [
+        ],
+      "rom": "600KB",
+      "ram": "604KB",
+      "deps": {
+        "components": [
+        ]
+      },
+      "build": {
+        "sub_component": [
+        ],
+        "inner_api": [
+          {
+            "name": "//base/accesscontrol/accesscontrol_cangjie_wrapper/ohos/ability_access_ctrl:ohos.ability_access_ctrl"
+          },
+          {
+            "name": "//base/accesscontrol/accesscontrol_cangjie_wrapper/ohos/security/permission_request_result:ohos.security.permission_request_result"
+          }
+        ],
+        "test": [
+        ]
+      }
+    }
+}
