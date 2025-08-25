@@ -1,8 +1,8 @@
-# accesscontrol_accesscontrol_cangjie_wrapper
+# accesscontrol_cangjie_wrapper
 
 ## Introduction
 
-The accesscontrol_accesscontrol_cangjie_wrapper is a Cangjie API encapsulated on OpenHarmony based on the access_token capability. The access_token information of the application mainly includes the application identity APPID, user ID, application clone index, application APL (Ability Privilege Level) level, application permission information, etc. The access_token information of each application is identified by a 32-bit unique device identifier, TokenID.
+The accesscontrol_cangjie_wrapper is a Cangjie API encapsulated on OpenHarmony based on the access_token capability. The access_token information of the application mainly includes the application identity APPID, user ID, application clone index, application APL (Ability Privilege Level) level, application permission information, etc. The access_token information of each application is identified by a 32-bit unique device identifier, TokenID.
 
 ## Architecture
 
@@ -14,10 +14,13 @@ The accesscontrol_accesscontrol_cangjie_wrapper is a Cangjie API encapsulated on
 
 The source code of the program access control is under base/accesscontrol/accesstrol_cangjie_wrapper
 
+```
+base/accesscontrol/accesscontrol_cangjie_wrapper
 ├── figures                 # architecture pictures
 └── ohos                    # Cangjie program access control interface
     ├── ability_access_ctrl # Cangjie program access control management interface
     └── security            # Permission request result object
+```
 
 ## Repositories Involved
 
