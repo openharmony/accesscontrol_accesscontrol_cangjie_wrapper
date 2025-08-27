@@ -13,57 +13,65 @@
  * limitations under the License.
  */
 
-protected package ohos.security.permission_request_result
+package ohos.security.permission_request_result
 
-import ohos.base.BusinessException
+import ohos.business_exception.BusinessException
 import ohos.ffi.{ CArrString, CArrI32, CArrBool }
 import ohos.labels.APILevel
 
 const INVALID_PARA: Int32 = 12100001
 const OUT_MEMORY_ERR: Int32 = 12100008
 
+/**
+ * The result of requestPermissionsFromUser with asynchronous callback.
+ *
+ * @relation declare class PermissionRequestResult
+ */
 @!APILevel[
     21,
-    atomicservice: true,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.Security.AccessToken"
 ]
 public class PermissionRequestResult {
+    /**
+    * The permissions passed in by the user.
+    *
+    * @relation permissions: Array<string>
+    */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Security.AccessToken"
     ]
     public var permissions: Array<String>
 
+    /**
+    * The results for the corresponding request permissions. The value 0 indicates that a
+    * permission is granted, the value -1 indicates not, and the value 2 indicates the request is invalid.
+    *
+    * @relation authResults: Array<int>
+    */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Security.AccessToken"
     ]
     public var authResults: Array<Int32>
 
+    /**
+    * Specifies whether a dialog box is shown for each requested permission.
+    * The value true means that a dialog box is shown, and false means the opposite.
+    *
+    * @relation dialogShownResults?: Array<boolean>
+    */
     @!APILevel[
         21,
-        atomicservice: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Security.AccessToken"
     ]
-    public var dialogShownResults: ?Array<Bool> = None
+    public var dialogShownResults = Array<Bool>()
 
-    @!APILevel[
-        21,
-        atomicservice: true,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Security.AccessToken"
-    ]
-    public init(
+    protected init(
         permissions: Array<String>,
         authResults: Array<Int32>
     ) {
@@ -71,7 +79,7 @@ public class PermissionRequestResult {
         this.authResults = authResults
     }
 
-    static func fromCPermissionRequestResult(cRet: CPermissionRequestResult): PermissionRequestResult {
+    protected static func fromCPermissionRequestResult(cRet: CPermissionRequestResult): PermissionRequestResult {
         let pSize = cRet.permissions.size
         let pPtr = cRet.permissions.head
         if (pPtr.isNull()) {
@@ -113,7 +121,7 @@ public class PermissionRequestResult {
 }
 
 @C
-struct CPermissionRequestResult {
+protected struct CPermissionRequestResult {
     CPermissionRequestResult(
         let permissions: CArrString,
         let authResults: CArrI32,
@@ -122,9 +130,9 @@ struct CPermissionRequestResult {
 }
 
 @C
-struct RetDataCPermissionRequestResult {
+protected struct RetDataCPermissionRequestResult {
     RetDataCPermissionRequestResult(
-        let code: Int32,
-        let data: CPermissionRequestResult
+        protected let code: Int32,
+        protected let data: CPermissionRequestResult
     ) {}
 }
