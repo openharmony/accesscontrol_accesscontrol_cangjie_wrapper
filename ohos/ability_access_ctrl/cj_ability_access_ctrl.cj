@@ -15,18 +15,26 @@
 
 package ohos.ability_access_ctrl
 
-import std.collection.ArrayList
+import ohos.app.ability.ui_ability.{UIAbilityContext, getStageContext}
+import ohos.business_exception.{BusinessException, AsyncCallback}
+import ohos.ffi.{ CArrString, CArrUI32, Callback1Param, freeArrCString, toArrayCString}
 import std.deriving.Derive
-import std.sync.Mutex
 import ohos.ffi.*
-import ohos.hilog.*
-import ohos.base.*
-// import ohos.ability.*
-import ohos.labels.*
+import ohos.hilog.HilogChannel
+public import ohos.security.permission_request_result.*
+import ohos.security.permission_request_result.*
+
+import ohos.labels.APILevel
 
 const INVALID_PARA: Int32 = 12100001
 const OUT_MEMORY_ERR: Int32 = 12100008
 
+/**
+ * Indicates permissions.
+ *
+ * @relation type Permissions = string
+ * @syscap SystemCapability.Security.AccessToken
+ */
 public type Permissions = String
 
 type StageContext = CPointer<Unit>
@@ -61,169 +69,71 @@ foreign {
 const SECURITY_DOMAIN_ACCESSTOKEN: UInt32 = 0xD005A01
 let ACCESS_LOG = HilogChannel(0, SECURITY_DOMAIN_ACCESSTOKEN, "CJ-AbilityAccessCtrl")
 
+/**
+* GrantStatus.
+*
+* @relation export enum GrantStatus
+*/
 @Derive[ToString, Equatable]
 @!APILevel[
     21,
-    atomicservice: true,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.Security.AccessToken"
 ]
 public enum GrantStatus {
+    /**
+     * access_token permission check fail
+     *
+     * @relation PERMISSION_DENIED = -1
+     */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Security.AccessToken"
     ]
-    PERMISSION_DENIED
-    | @!APILevel[
+    PermissionDenied
+    | 
+    /**
+     * access_token permission check success
+     *
+     * @relation PERMISSION_GRANTED = 0
+     */
+    @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Security.AccessToken"
     ]
-    PERMISSION_GRANTED
+    PermissionGranted
     | ...
 
     static func toGrantStatus(code: Int32): GrantStatus {
         if (code == -1) {
-            return PERMISSION_DENIED
+            return PermissionDenied
         } else {
-            return PERMISSION_GRANTED
+            return PermissionGranted
         }
     }
 }
 
+/**
+ * abilityAccessCtrl
+ *
+ * @relation declare namespace abilityAccessCtrl
+ */
 @!APILevel[
     21,
-    atomicservice: true,
-    crossplatform: true,
-    stagemodelonly: true,
-    syscap: "SystemCapability.Security.AccessToken"
-]
-public class PermissionRequestResult {
-    @!APILevel[
-        21,
-        atomicservice: true,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Security.AccessToken"
-    ]
-    public var permissions: Array<String>
-
-    @!APILevel[
-        21,
-        atomicservice: true,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Security.AccessToken"
-    ]
-    public var authResults: Array<Int32>
-
-    @!APILevel[
-        21,
-        atomicservice: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Security.AccessToken"
-    ]
-    public var dialogShownResults: ?Array<Bool> = None
-
-    @!APILevel[
-        21,
-        atomicservice: true,
-        crossplatform: true,
-        stagemodelonly: true,
-        syscap: "SystemCapability.Security.AccessToken"
-    ]
-    public init(
-        permissions: Array<String>,
-        authResults: Array<Int32>
-    ) {
-        this.permissions = permissions
-        this.authResults = authResults
-    }
-
-    static func fromCPermissionRequestResult(cRet: CPermissionRequestResult): PermissionRequestResult {
-        let pSize = cRet.permissions.size
-        let pPtr = cRet.permissions.head
-        if (pPtr.isNull()) {
-            throw BusinessException(OUT_MEMORY_ERR, "malloc failed!")
-        }
-        let permissionsArr = unsafe {
-            Array<String>(
-                pSize,
-                {
-                    i =>
-                    let cString = pPtr.read(i)
-                    let permission = cString.toString()
-                    LibC.free(cString)
-                    permission
-                }
-            )
-        }
-        unsafe { LibC.free<CString>(pPtr) }
-
-        let cSize = cRet.authResults.size
-        let cPtr = cRet.authResults.head
-        if (cPtr.isNull()) {
-            throw BusinessException(OUT_MEMORY_ERR, "malloc failed!")
-        }
-        let autuResultsArr = unsafe { Array<Int32>(cSize, {i => cPtr.read(i)}) }
-        unsafe { LibC.free<Int32>(cPtr) }
-
-        let dSize = cRet.dialogShownResults.size
-        let dPtr = cRet.dialogShownResults.head
-        if (dPtr.isNull()) {
-            return PermissionRequestResult(permissionsArr, autuResultsArr)
-        }
-        let dialogShownResultsArr = unsafe { Array<Bool>(dSize, {i => dPtr.read(i)}) }
-        unsafe { LibC.free<Bool>(dPtr) }
-        let result = PermissionRequestResult(permissionsArr, autuResultsArr)
-        result.dialogShownResults = dialogShownResultsArr
-        return result
-    }
-}
-
-@C
-struct CPermissionRequestResult {
-    CPermissionRequestResult(
-        let permissions: CArrString,
-        let authResults: CArrI32,
-        let dialogShownResults: CArrBool
-    ) {}
-}
-
-@C
-struct RetDataCPermissionRequestResult {
-    RetDataCPermissionRequestResult(
-        let code: Int32,
-        let data: CPermissionRequestResult
-    ) {}
-}
-
-@!APILevel[
-    21,
-    atomicservice: true,
-    crossplatform: true,
     stagemodelonly: true,
     syscap: "SystemCapability.Security.AccessToken"
 ]
 public class AbilityAccessCtrl {
-
+    protected init() {}
     /**
      * Obtains the AtManager instance.
      *
-     * @returns { AtManager } returns the instance of the AtManager.
-     * @syscap SystemCapability.Security.AccessToken
-     * @bref createAtManager(): AtManager
+     * @relation function createAtManager(): AtManager
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Security.AccessToken"
     ]
@@ -232,14 +142,18 @@ public class AbilityAccessCtrl {
     }
 }
 
+/**
+* Provides methods for managing access_token.
+*
+* @relation interface AtManager
+*/
 @!APILevel[
     21,
-    atomicservice: true,
     stagemodelonly: true,
     syscap: "SystemCapability.Security.AccessToken"
 ]
 public class AtManager {
-
+    protected init() {}
     /**
      * Requests certain permissions from the user.
      *
@@ -250,21 +164,24 @@ public class AtManager {
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 12100001 - The parameter is invalid. The context is invalid when it does not
      *                                          belong to the application itself.
+     * @throws { IllegalArgumentException } - The context is invalid.
      *
-     * @bref requestPermissionsFromUser(context: Context,
-     *       permissionList: Array<Permissions>) : Promise<PermissionRequestResult>
+     * @relation requestPermissionsFromUser(
+     *             context: Context,
+     *             permissionList: Array<Permissions>,
+     *             requestCallback: AsyncCallback<PermissionRequestResult>
+     *           ): void;
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Security.AccessToken"
     ]
-    public func requestPermissionsFromUser(context: StageContext, permissionList: Array<Permissions>,
-        callback: AsyncCallback<PermissionRequestResult>): Unit {
-        if (context.isNull()) {
-            throw BusinessException(INVALID_PARA, getErrorInfo(INVALID_PARA))
+    public func requestPermissionsFromUser(context: UIAbilityContext, permissionList: Array<Permissions>,
+        requestCallback: AsyncCallback<PermissionRequestResult>): Unit {
+        let stageContext = getStageContext(context)
+        if (stageContext.isNull()) {
+            throw IllegalArgumentException("The context is invalid.")
         }
         unsafe {
             let cPermissionList = toArrayCString(permissionList)
@@ -272,22 +189,22 @@ public class AtManager {
                 value: RetDataCPermissionRequestResult => if (value.code == 0) {
                     try {
                         let data = PermissionRequestResult.fromCPermissionRequestResult(value.data)
-                        callback(None, data)
+                        requestCallback(None, data)
                     } catch (e: BusinessException) {
-                        callback(AsyncError(OUT_MEMORY_ERR), None)
+                        requestCallback(e, None)
                     }
                 } else {
                     try {
                         // free memory
                         PermissionRequestResult.fromCPermissionRequestResult(value.data)
-                        callback(AsyncError(value.code), None)
+                        requestCallback(BusinessException(value.code, getErrorInfo(value.code)), None)
                     } catch (e: BusinessException) {
-                        callback(AsyncError(OUT_MEMORY_ERR), None)
+                        requestCallback(e, None)
                     }
                 }
             }
             let lambdaData = Callback1Param<RetDataCPermissionRequestResult, Unit>(wrapper)
-            FfiOHOSAbilityAccessCtrlRequestPermissionsFromUser(context, cPermissionList, lambdaData.getID())
+            FfiOHOSAbilityAccessCtrlRequestPermissionsFromUser(stageContext, cPermissionList, lambdaData.getID())
             freeArrCString(cPermissionList)
         }
     }
@@ -304,12 +221,10 @@ public class AtManager {
      * @throws { BusinessException } 12100001 - The parameter is invalid. The tokenID is 0,
      *                                          or the string size of permissionName is larger than 256.
      *
-     * @bref checkAccessTokenSync(tokenID: number, permissionName: Permissions): GrantStatus
+     * @relation checkAccessTokenSync(tokenID: int, permissionName: Permissions): GrantStatus
      */
     @!APILevel[
         21,
-        atomicservice: true,
-        crossplatform: true,
         stagemodelonly: true,
         syscap: "SystemCapability.Security.AccessToken"
     ]
