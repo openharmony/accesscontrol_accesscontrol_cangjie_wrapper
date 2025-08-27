@@ -21,10 +21,15 @@
         ],
       "hisysevent_config": [
         ],
-      "rom": "600KB",
-      "ram": "604KB",
+      "rom": "162KB",
+      "ram": "180KB",
       "deps": {
         "components": [
+          "access_token",
+          "cangjie_ark_interop",
+          "ability_cangjie_wrapper",
+          "arkui_cangjie_wrapper",
+          "hiviewdfx_cangjie_wrapper"
         ]
       },
       "build": {
