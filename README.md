@@ -22,6 +22,23 @@ base/accesscontrol/accesscontrol_cangjie_wrapper
     └── security            # Permission request result object
 ```
 
+## Constraints
+
+The currently open accesscontrol Cangjie api only supports standard devices.
+
+## Usage Guidelines
+
+The following features are provided:
+
+  - The AbilityAccessCtrl module provides APIs for application permission management, including authentication and authorization.
+  - The PermissionRequestResult module defines the permission request result returned by requestPermissionsFromUser.
+
+The following features are not provided yet:
+
+  - Check the status of application permissions.
+  - Displays a dialog box for setting a global swich.
+  - Displays a permission settings dialog box to grant permissions the second time.
+
 ## Repositories Involved
 
-[access_token](https://gitee.com/openharmony/security_access_token)
+[security_access_token](https://gitee.com/openharmony/security_access_token)
