@@ -4,9 +4,9 @@
 
 The accesscontrol_cangjie_wrapper is a Cangjie API encapsulated on OpenHarmony based on the access_token capability. The access_token information of the application mainly includes the application identity APPID, user ID, application clone index, application APL (Ability Privilege Level) level, application permission information, etc. The access_token information of each application is identified by a 32-bit unique device identifier, TokenID.
 
-## Architecture
+## System Architecture
 
-**Figure 1** accesscontrol_cangjie_wrapper architecture
+**Figure 1** System architecture of accesscontrol_cangjie_wrapper
 
 ![](figures/accesscontrol_cangjie_wrapper_architecture_en.png "accesscontrol_cangjie_wrapper architecture")
 
@@ -38,6 +38,12 @@ The following features are not provided yet:
   - Check the status of application permissions.
   - Displays a dialog box for setting a global swich.
   - Displays a permission settings dialog box to grant permissions the second time.
+
+For Accesscontrol-related APIs, please refer to [ohos.ability_access_ctrl (Application Access Control Management)](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_en/apis/AbilityKit/cj-apis-ability_access_ctrl.md). For relevant guidance, please refer to [Ability Kit Guide](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/tree/master/doc/Dev_Guide/source_en/application-models).
+
+## Code Contribution
+
+Developers are welcome to contribute code, documentation, etc. For specific contribution processes and methods, please refer to [Code Contribution](https://gitcode.com/openharmony/docs/blob/master/en/contribute/code-contribution.md).
 
 ## Repositories Involved
 
