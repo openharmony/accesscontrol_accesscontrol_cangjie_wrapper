@@ -22,6 +22,23 @@ base/accesscontrol/accesscontrol_cangjie_wrapper
     └── security            # 权限请求结果对象
 ```
 
+## 约束
+
+当前开放的程序访问控制仓颉接口仅支持standard设备。
+
+## 使用说明
+
+如架构图所示，程序访问控制仓颉接口以下功能接口，开发者可以根据使用诉求，综合使用一类或多类接口：
+
+  - 程序访问控制提供应用程序的权限校验和管理能力。用户可通过提供的接口申请和查看应用权限。
+  - 权限请求结果对象可以在用户调用requestPermissionsFromUser接口申请权限时返回此次权限申请的结果。
+
+与ArkTS相比，暂不支持以下功能：
+
+  - 查询应用权限状态。
+  - 拉起全局开关设置。
+  - 二次拉起权限设置弹窗。
+
 ## 相关仓
 
-[access_token](https://gitee.com/openharmony/security_access_token)
+[security_access_token](https://gitee.com/openharmony/security_access_token)
