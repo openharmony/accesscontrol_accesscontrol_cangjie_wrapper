@@ -24,9 +24,10 @@ The source code of the program access control is under base/accesscontrol/access
 ```
 base/accesscontrol/accesscontrol_cangjie_wrapper
 ├── figures                 # architecture pictures
-└── ohos                    # Cangjie program access control interface
-    ├── ability_access_ctrl # Cangjie program access control management interface
-    └── security            # Permission request result object
+├── ohos                    # Cangjie program access control interface
+│   ├── ability_access_ctrl # Cangjie program access control management interface
+│   └── security            # Permission request result object
+└── test                    # Cangjie test code
 ```
 
 ## Usage Guidelines
