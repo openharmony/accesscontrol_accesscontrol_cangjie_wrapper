@@ -25,9 +25,10 @@
 ```
 base/accesscontrol/accesscontrol_cangjie_wrapper
 ├── figures                 # 存放README中的架构图
-└── ohos                    # 仓颉访问控制接口
-    ├── ability_access_ctrl # 仓颉访问控制管理接口
-    └── security            # 权限请求结果对象
+├── ohos                    # 仓颉访问控制接口
+│   ├── ability_access_ctrl # 仓颉访问控制管理接口
+│   └── security            # 权限请求结果对象
+└── test                    # 仓颉测试代码
 ```
 
 
