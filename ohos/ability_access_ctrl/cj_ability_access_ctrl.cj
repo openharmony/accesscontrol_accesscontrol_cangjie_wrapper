@@ -76,8 +76,7 @@ let ACCESS_LOG = HilogChannel(0, SECURITY_DOMAIN_ACCESSTOKEN, "CJ-AbilityAccessC
 */
 @Derive[ToString, Equatable]
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Security.AccessToken"
 ]
 public enum GrantStatus {
@@ -87,8 +86,7 @@ public enum GrantStatus {
      * @relation PERMISSION_DENIED = -1
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Security.AccessToken"
     ]
     PermissionDenied
@@ -99,8 +97,7 @@ public enum GrantStatus {
      * @relation PERMISSION_GRANTED = 0
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Security.AccessToken"
     ]
     PermissionGranted
@@ -121,8 +118,7 @@ public enum GrantStatus {
  * @relation declare namespace abilityAccessCtrl
  */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Security.AccessToken"
 ]
 public class AbilityAccessCtrl {
@@ -133,8 +129,7 @@ public class AbilityAccessCtrl {
      * @relation function createAtManager(): AtManager
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Security.AccessToken"
     ]
     public static func createAtManager(): AtManager {
@@ -148,8 +143,7 @@ public class AbilityAccessCtrl {
 * @relation interface AtManager
 */
 @!APILevel[
-    21,
-    stagemodelonly: true,
+    22,
     syscap: "SystemCapability.Security.AccessToken"
 ]
 public class AtManager {
@@ -173,8 +167,7 @@ public class AtManager {
      *           ): void;
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Security.AccessToken"
     ]
     public func requestPermissionsFromUser(context: UIAbilityContext, permissionList: Array<Permissions>,
@@ -224,8 +217,7 @@ public class AtManager {
      * @relation checkAccessTokenSync(tokenID: int, permissionName: Permissions): GrantStatus
      */
     @!APILevel[
-        21,
-        stagemodelonly: true,
+        22,
         syscap: "SystemCapability.Security.AccessToken"
     ]
     public func checkAccessToken(tokenID: UInt32, permissionName: Permissions): GrantStatus {
