@@ -16,6 +16,9 @@ As shown in the architecture diagram:
 - checkAccessToken: accesscontrol_cangjie_wrapper provides permission verification and management capabilities for applications. Developers can use checkAccessToken to check whether an application has been authorized.
 - Cangjie Accesscontrol FFI interface: Based on cross-language interoperability via C interfaces to implement accesscontrol Cangjie API.
 - access_token: It is responsible for providing basic functions of application access control, and encapsulates C interfaces to provide interoperability for Cangjie.
+- ability_cangjie_wrapper: Provides UIAbilityContext to request user authorization in a dialog box.
+- hiviewdfx_cangjie_wrapper: Provides a logging system that allows applications/services to output log content according to specified levels, identifiers, and format strings.
+- Cangjie Interop API Public Repository: Provides definitions for APILevel and BusinessException classes.
 
 ## Directory Structure
 
@@ -53,8 +56,10 @@ Developers are welcome to contribute code, documentation, etc. For specific cont
 
 ## Repositories Involved
 
-[security_access_token](https://gitee.com/openharmony/security_access_token)
+[security_access_token](https://gitcode.com/openharmony/security_access_token)
 
 [arkcompiler_cangjie_ark_interop](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop)
 
 [ability_ability_cangjie_wrapper](https://gitcode.com/openharmony-sig/ability_ability_cangjie_wrapper)
+
+[hiviewdfx_hiviewdfx_cangjie_wrapper](https://gitcode.com/openharmony-sig/hiviewdfx_hiviewdfx_cangjie_wrapper)

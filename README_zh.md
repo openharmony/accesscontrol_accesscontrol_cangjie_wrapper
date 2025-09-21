@@ -14,9 +14,11 @@
 
 - 请求用户授权：开发者可调用requestPermissionsFromUser接口请求用户授权，并返回此次权限申请的结果。访问控制提供应用程序的权限校验和管理能力。
 - 检验应用权限是否被授予： 开发者可通过checkAccessToken查看应用是否被授权。
-- 仓颉访问控制FFI接口定义：负责定义C互操作仓颉接口，用于实现仓颉访问控制能力。
-- 访问控制模块：负责提供访问控制基础功能，封装C接口提供给仓颉进行互操作。
-
+- 仓颉访问控制FFI接口定义：负责定义C语言互操作仓颉接口，用于实现仓颉访问控制能力。
+- 访问控制模块：负责提供访问控制基础功能，封装C语言接口提供给仓颉进行互操作。
+- 元能力仓颉接口: 提供应用上下文，拉起弹窗请求用户授予权限。
+- DFX仓颉接口：提供日志系统，使应用/服务可以按照指定级别、标识和格式字符串输出日志内容。
+- 仓颉互操作API公共仓：提供仓颉标签与异常类的定义。
 
 ## 目录
 
@@ -55,8 +57,10 @@ base/accesscontrol/accesscontrol_cangjie_wrapper
 
 ## 相关仓
 
-[security_access_token](https://gitee.com/openharmony/security_access_token)
+[security_access_token](https://gitcode.com/openharmony/security_access_token)
 
 [arkcompiler_cangjie_ark_interop](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop)
 
 [ability_ability_cangjie_wrapper](https://gitcode.com/openharmony-sig/ability_ability_cangjie_wrapper)
+
+[hiviewdfx_hiviewdfx_cangjie_wrapper](https://gitcode.com/openharmony-sig/hiviewdfx_hiviewdfx_cangjie_wrapper)
