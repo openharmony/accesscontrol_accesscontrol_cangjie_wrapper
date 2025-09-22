@@ -12,8 +12,8 @@ The accesscontrol_cangjie_wrapper is a Cangjie API encapsulated on OpenHarmony b
 
 As shown in the architecture diagram:
 
-- requestPermissionsFromUser: Developers can call the requestPermissionsFromUser to request user authorization, and the result of this permission application will be returned.
-- checkAccessToken: accesscontrol_cangjie_wrapper provides permission verification and management capabilities for applications. Developers can use checkAccessToken to check whether an application has been authorized.
+- requestPermissionsFromUser: Developers can request user authorization, and the result of this permission application will be returned.
+- checkAccessToken: accesscontrol_cangjie_wrapper provides permission verification and management capabilities for applications. Developers can check whether an application has been authorized.
 - Cangjie Accesscontrol FFI interface: Based on cross-language interoperability via C interfaces to implement accesscontrol Cangjie API.
 - access_token: It is responsible for providing basic functions of application access control, and encapsulates C interfaces to provide interoperability for Cangjie.
 
