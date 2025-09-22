@@ -16,9 +16,6 @@ As shown in the architecture diagram:
 - checkAccessToken: accesscontrol_cangjie_wrapper provides permission verification and management capabilities for applications. Developers can use checkAccessToken to check whether an application has been authorized.
 - Cangjie Accesscontrol FFI interface: Based on cross-language interoperability via C interfaces to implement accesscontrol Cangjie API.
 - access_token: It is responsible for providing basic functions of application access control, and encapsulates C interfaces to provide interoperability for Cangjie.
-- ability_cangjie_wrapper: Provides UIAbilityContext to request user authorization in a dialog box.
-- hiviewdfx_cangjie_wrapper: Provides a logging system that allows applications/services to output log content according to specified levels, identifiers, and format strings.
-- Cangjie Interop API Public Repository: Provides definitions for APILevel and BusinessException classes.
 
 ## Directory Structure
 
@@ -26,11 +23,13 @@ The source code of the program access control is under base/accesscontrol/access
 
 ```
 base/accesscontrol/accesscontrol_cangjie_wrapper
-├── figures                 # architecture pictures
-├── ohos                    # Cangjie program access control interface
-│   ├── ability_access_ctrl # Cangjie program access control management interface
-│   └── security            # Permission request result object
-└── test                    # Cangjie test code
+├── figures                       # architecture pictures
+├── ohos                          # Cangjie program access control interface
+│   ├── ability_access_ctrl       # Cangjie program access control management interface
+│   └── security                  # Permission request result object
+└── test                          # Cangjie test code
+    └── APILevel22
+        └── ability_access_ctrl   # Cangjie AbilityAccessCtrl test code
 ```
 
 ## Usage Guidelines
