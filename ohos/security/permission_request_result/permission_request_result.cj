@@ -28,7 +28,7 @@ const OUT_MEMORY_ERR: Int32 = 12100008
  * @relation declare class PermissionRequestResult
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Security.AccessToken"
 ]
 public class PermissionRequestResult {
@@ -38,7 +38,7 @@ public class PermissionRequestResult {
     * @relation permissions: Array<string>
     */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Security.AccessToken"
     ]
     public var permissions: Array<String>
@@ -50,7 +50,7 @@ public class PermissionRequestResult {
     * @relation authResults: Array<int>
     */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Security.AccessToken"
     ]
     public var authResults: Array<Int32>
@@ -62,7 +62,7 @@ public class PermissionRequestResult {
     * @relation dialogShownResults?: Array<boolean>
     */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Security.AccessToken"
     ]
     public var dialogShownResults = Array<Bool>()
