@@ -32,7 +32,7 @@ let permissionList = ["ohos.permission.READ_CONTACTS"]
 @Test
 class Test_ability_access_ctrl {
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_grantStatus() {
         let abilityAccessCtrl = AbilityAccessCtrl.createAtManager()
         let grantStatus = abilityAccessCtrl.checkAccessToken(1, "READ_CONTACTS")
@@ -41,14 +41,14 @@ class Test_ability_access_ctrl {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_AbilityAccessCtrl() {
         let aac = AbilityAccessCtrl.createAtManager()
         @Expect(true)
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_AtManager() {
         let abilityAccessCtrl = AbilityAccessCtrl.createAtManager()
         let uiAbilityContext = getAbilityContext()
@@ -70,7 +70,7 @@ class Test_ability_access_ctrl {
     }
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_checkAccessToken() {
         let abilityAccessCtrl = AbilityAccessCtrl.createAtManager()
         try {
@@ -84,7 +84,7 @@ class Test_ability_access_ctrl {
 
 
     @TestCase
-    @Tag[APILevel21, TestLevel0]
+    @Tag[APILevel22, TestLevel0]
     func test_auto_enum_GrantStatus() {
         let arr1: Array<GrantStatus> = [
             PermissionDenied,
