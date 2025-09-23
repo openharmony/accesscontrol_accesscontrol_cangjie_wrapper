@@ -16,6 +16,9 @@
 - 鉴权接口： 开发者可查看应用是否被授权。
 - 仓颉访问控制FFI接口定义：负责定义C语言互操作仓颉接口，用于实现仓颉访问控制能力。
 - 访问控制模块：负责提供访问控制基础功能，封装C语言接口提供给仓颉进行互操作。
+- ability_cangjie_wrapper：负责提供UIAbility上下文给授权接口拉起弹窗请求用户授权。
+- hiviewdfx_cangjie_wrapper：负责提供日志接口，用于在关键路径处打印日志。
+- cangjie_ark_interop：负责提供仓颉注解类定义，用于对API进行标注。以及提供抛向用户的BusinessException异常类定义。
 
 ## 目录
 
@@ -28,8 +31,7 @@ base/accesscontrol/accesscontrol_cangjie_wrapper
 │   ├── ability_access_ctrl       # 仓颉访问控制管理接口
 │   └── security                  # 权限请求结果对象
 └── test                          # 仓颉测试代码
-    └── APILevel22
-        └── ability_access_ctrl   # 仓颉访问控制管理接口测试代码
+    └── ability_access_ctrl       # 仓颉访问控制管理接口测试代码
 ```
 
 
