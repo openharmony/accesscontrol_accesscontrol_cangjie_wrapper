@@ -1,8 +1,8 @@
-# 访问控制仓颉接口
+# 访问控制仓颉封装
 
 ## 简介
 
-访问控制仓颉接口是在OpenHarmony上基于AccessToken能力之上封装的仓颉API。应用的Accesstoken信息主要包括应用身份标识APPID、用户ID、应用分身索引、应用APL(Ability Privilege Level)等级、应用权限信息等。每个应用的Accesstoken信息由一个32bits的设备内唯一标识符TokenID(Token identity)来标识。仓颉接口提供应用程序的权限校验、申请和管理能力。当前开放的访问控制仓颉接口仅支持standard设备。
+访问控制仓颉封装提供应用程序的权限校验、申请能力。当前开放的访问控制仓颉接口仅支持standard设备。
 
 ## 系统架构
 
@@ -12,13 +12,22 @@
 
 如架构图所示：
 
-- 授权接口：开发者可请求用户授权，并返回此次权限申请的结果。访问控制提供应用程序的权限校验和管理能力。
-- 鉴权接口： 开发者可查看应用是否被授权。
-- 仓颉访问控制FFI接口定义：负责定义C语言互操作仓颉接口，用于实现仓颉访问控制能力。
+接口层：
+
+- 鉴权接口：面向开发者提供的鉴权API，开发者可查看应用是否被授权。
+- 授权接口：面向开发者提供的授权API，开发者可请求用户授权，并返回此次权限申请的结果。访问控制提供应用程序的权限校验和管理能力。
+
+框架层：
+
+- 鉴权接口功能封装：封装checkAccessToken接口，实现鉴权能力。
+- 授权接口功能封装：封装requestPermissionsFromUser接口，实现授权能力。
+
+架构图中的依赖部件引入说明：
+
 - 访问控制模块：负责提供访问控制基础功能，封装C语言接口提供给仓颉进行互操作。
+- hiviewdfx_cangjie_wrapper：负责提供日志接口。访问控制仓颉封装依赖此部件用于在关键路径处打印日志。
+- cangjie_ark_interop：负责提供仓颉注解类定义和BusinessException异常类定义。访问控制仓颉封装依赖此部件用于对API进行标注，及在错误分支向用户抛出异常。
 - ability_cangjie_wrapper：负责提供UIAbility上下文给授权接口拉起弹窗请求用户授权。
-- hiviewdfx_cangjie_wrapper：负责提供日志接口，用于在关键路径处打印日志。
-- cangjie_ark_interop：负责提供仓颉注解类定义，用于对API进行标注。以及提供抛向用户的BusinessException异常类定义。
 
 ## 目录
 
@@ -49,8 +58,15 @@ base/accesscontrol/accesscontrol_cangjie_wrapper
   - 拉起全局开关设置。
   - 二次拉起权限设置弹窗。
 
-
 访问控制相关API请参见[仓颉访问控制API文档](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/AbilityKit/cj-apis-ability_access_ctrl.md)，相关指导请参见[访问控制概述](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_zh_cn/security/AccessToken/cj-access-token-overview.md)。
+
+## 约束
+
+与ArkTS提供的API能力相比，暂不支持以下功能：
+
+  - 查询应用权限状态。
+  - 拉起全局开关设置。
+  - 二次拉起权限设置弹窗。
 
 ## 参与贡献
 
