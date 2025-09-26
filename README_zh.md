@@ -14,13 +14,15 @@
 
 接口层：
 
-- 鉴权接口：面向开发者提供的鉴权API，开发者可查看应用是否被授权。
-- 授权接口：面向开发者提供的授权API，开发者可请求用户授权，并返回此次权限申请的结果。访问控制提供应用程序的权限校验和管理能力。
+- 程序访问控制管理：包含鉴权接口和授权接口。
+  - 鉴权接口：面向开发者提供的鉴权API，开发者可查看应用是否被授权。
+  - 授权接口：面向开发者提供的授权API，开发者可请求用户授权，并返回此次权限申请的结果。访问控制提供应用程序的权限校验和管理能力。
 
 框架层：
 
-- 鉴权接口功能封装：封装checkAccessToken接口，实现鉴权能力。
-- 授权接口功能封装：封装requestPermissionsFromUser接口，实现授权能力。
+- 程序访问控制管理封装：为鉴权接口和授权接口的封装实现。
+  - 鉴权接口功能封装：封装checkAccessToken接口，实现鉴权能力。
+  - 授权接口功能封装：封装requestPermissionsFromUser接口，实现授权能力。
 
 架构图中的依赖部件引入说明：
 
@@ -37,7 +39,7 @@
 base/accesscontrol/accesscontrol_cangjie_wrapper
 ├── figures                       # 存放README中的架构图
 ├── ohos                          # 仓颉访问控制接口
-│   ├── ability_access_ctrl       # 仓颉访问控制管理接口
+│   ├── ability_access_ctrl       # 仓颉程序访问控制管理接口
 │   └── security                  # 权限请求结果对象
 └── test                          # 仓颉测试代码
     └── ability_access_ctrl       # 仓颉访问控制管理接口测试代码
@@ -48,15 +50,8 @@ base/accesscontrol/accesscontrol_cangjie_wrapper
 
 访问控制仓颉接口提供以下功能，开发者可以根据诉求使用：
 
-  - 访问控制提供应用程序的权限校验和管理能力。开发者可通过提供的接口申请和查看应用权限。
-  - 权限请求结果对象可以在用户调用接口申请权限时返回此次权限申请的结果。
+  - 访问控制提供应用程序的权限校验和管理能力。开发者可通过提供的接口申请和查看应用权限。相关示例请参见[向用户申请授权](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_zh_cn/security/AccessToken/cj-request-user-authorization.md)。
 
-
-与ArkTS提供的API能力相比，暂不支持以下功能：
-
-  - 查询应用权限状态。
-  - 拉起全局开关设置。
-  - 二次拉起权限设置弹窗。
 
 访问控制相关API请参见[仓颉访问控制API文档](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/API_Reference/source_zh_cn/apis/AbilityKit/cj-apis-ability_access_ctrl.md)，相关指导请参见[访问控制概述](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_zh_cn/security/AccessToken/cj-access-token-overview.md)。
 

@@ -14,13 +14,15 @@ As shown in the architecture diagram:
 
 interface: Provides APIs for developers.
 
-- checkAccessToken: accesscontrol_cangjie_wrapper provides permission verification and management capabilities for applications. Developers can check whether an application has been authorized.
-- requestPermissions: Developers can request user authorization, and the result of this permission application will be returned.
+- abilityAcessCtrl:
+  - checkAccessToken: accesscontrol_cangjie_wrapper provides permission verification and management capabilities for applications. Developers can check whether an application has been authorized.
+  - requestPermissions: Developers can request user authorization, and the result of this permission application will be returned.
 
 frameworks:
 
-- checkAccessToken wrapper: Encapsulates the checkAccessToken interface, providing developers with the ability to check whether an application has been authorized.
-- requestPermissions wrapper: Encapsulates the requestPermissionsFromUser interface, providing developers with the ability to request permissions from users.
+- abilityAcessCtrl wrapper:
+  - checkAccessToken wrapper: Encapsulates the checkAccessToken interface, providing developers with the ability to check whether an application has been authorized.
+  - requestPermissions wrapper: Encapsulates the requestPermissionsFromUser interface, providing developers with the ability to request permissions from users.
 
 Dependency Component Introduction in Architecture:
 
@@ -47,8 +49,7 @@ base/accesscontrol/accesscontrol_cangjie_wrapper
 
 The following features are provided:
 
-  - The AbilityAccessCtrl module provides APIs for application permission management, including authentication and authorization.
-  - The PermissionRequestResult module defines the permission request result returned by requestPermissionsFromUser.
+  - The AbilityAccessCtrl module provides APIs for application permission management, including authentication and authorization. For relevant guidance, please refer to [Requesting User Authorization](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/security/AccessToken/cj-request-user-authorization.md).
 
 
 The following features are not provided yet:
