@@ -12,13 +12,24 @@ The accesscontrol_cangjie_wrapper is a Cangjie API encapsulated on OpenHarmony b
 
 As shown in the architecture diagram:
 
-- requestPermissionsFromUser: Developers can request user authorization, and the result of this permission application will be returned.
-- checkAccessToken: accesscontrol_cangjie_wrapper provides permission verification and management capabilities for applications. Developers can check whether an application has been authorized.
-- Cangjie Accesscontrol FFI interface: Based on cross-language interoperability via C interfaces to implement accesscontrol Cangjie API.
+interface: Provides APIs for developers.
+
+- abilityAcessCtrl:
+  - checkAccessToken: accesscontrol_cangjie_wrapper provides permission verification and management capabilities for applications. Developers can check whether an application has been authorized.
+  - requestPermissions: Developers can request user authorization, and the result of this permission application will be returned.
+
+frameworks:
+
+- abilityAcessCtrl wrapper:
+  - checkAccessToken wrapper: Encapsulates the checkAccessToken interface, providing developers with the ability to check whether an application has been authorized.
+  - requestPermissions wrapper: Encapsulates the requestPermissionsFromUser interface, providing developers with the ability to request permissions from users.
+
+Dependency Component Introduction in Architecture:
+
 - access_token: It is responsible for providing basic functions of application access control, and encapsulates C interfaces to provide interoperability for Cangjie.
-- ability_cangjie_wrapper: Responsible for providing UIAbilityContext to the authorization interface for launching permission request dialogs to users.
 - hiviewdfx_cangjie_wrapper: Responsible for providing HiLog APIs, used for printing logs at critical paths.
 - cangjie_ark_interop: Responsible for providing APILevel definitions, used for annotating APIs. Also provides the BusinessException exception class definition that is thrown to users.
+- ability_cangjie_wrapper: Responsible for providing UIAbilityContext to the authorization interface for launching permission request dialogs to users.
 
 ## Directory Structure
 
@@ -38,8 +49,7 @@ base/accesscontrol/accesscontrol_cangjie_wrapper
 
 The following features are provided:
 
-  - The AbilityAccessCtrl module provides APIs for application permission management, including authentication and authorization.
-  - The PermissionRequestResult module defines the permission request result returned by requestPermissionsFromUser.
+  - The AbilityAccessCtrl module provides APIs for application permission management, including authentication and authorization. For relevant guidance, please refer to [Requesting User Authorization](https://gitcode.com/openharmony-sig/arkcompiler_cangjie_ark_interop/blob/master/doc/Dev_Guide/source_en/security/AccessToken/cj-request-user-authorization.md).
 
 
 The following features are not provided yet:
@@ -54,6 +64,14 @@ For Accesscontrol-related APIs, please refer to [ohos.ability_access_ctrl (Appli
 ## Code Contribution
 
 Developers are welcome to contribute code, documentation, etc. For specific contribution processes and methods, please refer to [Code Contribution](https://gitcode.com/openharmony/docs/blob/master/en/contribute/code-contribution.md).
+
+## Constraints
+
+The following features are not provided yet:
+
+  - Check the status of application permissions.
+  - Displays a dialog box for setting a global swich.
+  - Displays a permission settings dialog box to grant permissions the second time.
 
 ## Repositories Involved
 
