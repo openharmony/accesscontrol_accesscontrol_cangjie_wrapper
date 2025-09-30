@@ -21,11 +21,11 @@ import std.unittest.testmacro.*
 import ohos.base.*
 import ohos.business_exception.*
 import ohos.hilog.Hilog
-import AbilityKit.AbilityAccessCtrl
-import AbilityKit.PermissionRequestResult
-import AbilityKit.GrantStatus
-import AbilityKit.MemoryLevel as AbilityMemoryLevel
-import PerformanceAnalysisKit.Hilog
+import kit.AbilityKit.AbilityAccessCtrl
+import kit.AbilityKit.PermissionRequestResult
+import kit.AbilityKit.GrantStatus
+import kit.AbilityKit.MemoryLevel as AbilityMemoryLevel
+import kit.PerformanceAnalysisKit.Hilog
 
 let permissionList = ["ohos.permission.READ_CONTACTS"]
 
