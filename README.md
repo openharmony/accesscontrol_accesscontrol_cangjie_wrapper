@@ -1,4 +1,4 @@
-# accesscontrol_cangjie_wrapper（beta）
+# accesscontrol_cangjie_wrapper(beta feature)
 
 ## Introduction
 
