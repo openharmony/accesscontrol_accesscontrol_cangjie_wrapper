@@ -26,8 +26,6 @@ const OUT_MEMORY_ERR: Int32 = 12100008
 
 /**
  * The result of requestPermissionsFromUser with asynchronous callback.
- *
- * @relation declare class PermissionRequestResult
  */
 @!APILevel[
     22,
@@ -36,8 +34,6 @@ const OUT_MEMORY_ERR: Int32 = 12100008
 public class PermissionRequestResult {
     /**
     * The permissions passed in by the user.
-    *
-    * @relation permissions: Array<string>
     */
     @!APILevel[
         22,
@@ -48,8 +44,6 @@ public class PermissionRequestResult {
     /**
     * The results for the corresponding request permissions. The value 0 indicates that a
     * permission is granted, the value -1 indicates not, and the value 2 indicates the request is invalid.
-    *
-    * @relation authResults: Array<int>
     */
     @!APILevel[
         22,
@@ -60,8 +54,6 @@ public class PermissionRequestResult {
     /**
     * Specifies whether a dialog box is shown for each requested permission.
     * The value true means that a dialog box is shown, and false means the opposite.
-    *
-    * @relation dialogShownResults?: Array<boolean>
     */
     @!APILevel[
         22,
