@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.ability_access_ctrl
 
 import ohos.app.ability.ui_ability.{UIAbilityContext, getStageContext}
@@ -31,9 +33,6 @@ const OUT_MEMORY_ERR: Int32 = 12100008
 
 /**
  * Indicates permissions.
- *
- * @relation type Permissions = string
- * @syscap SystemCapability.Security.AccessToken
  */
 public type Permissions = String
 
@@ -71,8 +70,6 @@ let ACCESS_LOG = HilogChannel(0, SECURITY_DOMAIN_ACCESSTOKEN, "CJ-AbilityAccessC
 
 /**
 * GrantStatus.
-*
-* @relation export enum GrantStatus
 */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -82,8 +79,6 @@ let ACCESS_LOG = HilogChannel(0, SECURITY_DOMAIN_ACCESSTOKEN, "CJ-AbilityAccessC
 public enum GrantStatus {
     /**
      * access_token permission check fail
-     *
-     * @relation PERMISSION_DENIED = -1
      */
     @!APILevel[
         since: "22",
@@ -93,8 +88,6 @@ public enum GrantStatus {
     | 
     /**
      * access_token permission check success
-     *
-     * @relation PERMISSION_GRANTED = 0
      */
     @!APILevel[
         since: "22",
@@ -114,8 +107,6 @@ public enum GrantStatus {
 
 /**
  * abilityAccessCtrl
- *
- * @relation declare namespace abilityAccessCtrl
  */
 @!APILevel[
     since: "22",
@@ -125,8 +116,6 @@ public class AbilityAccessCtrl {
     protected init() {}
     /**
      * Obtains the AtManager instance.
-     *
-     * @relation function createAtManager(): AtManager
      */
     @!APILevel[
         since: "22",
@@ -139,8 +128,6 @@ public class AbilityAccessCtrl {
 
 /**
 * Provides methods for managing access_token.
-*
-* @relation interface AtManager
 */
 @!APILevel[
     since: "22",
@@ -159,12 +146,6 @@ public class AtManager {
      * @throws { BusinessException } 12100001 - The parameter is invalid. The context is invalid when it does not
      *                                          belong to the application itself.
      * @throws { IllegalArgumentException } - The context is invalid.
-     *
-     * @relation requestPermissionsFromUser(
-     *             context: Context,
-     *             permissionList: Array<Permissions>,
-     *             requestCallback: AsyncCallback<PermissionRequestResult>
-     *           ): void;
      */
     @!APILevel[
         since: "22",
@@ -213,8 +194,6 @@ public class AtManager {
      * @throws { BusinessException } 401 - The parameter check failed.
      * @throws { BusinessException } 12100001 - The parameter is invalid. The tokenID is 0,
      *                                          or the string size of permissionName is larger than 256.
-     *
-     * @relation checkAccessTokenSync(tokenID: int, permissionName: Permissions): GrantStatus
      */
     @!APILevel[
         since: "22",
