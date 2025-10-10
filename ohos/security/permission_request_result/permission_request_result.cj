@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 
+// The Cangjie API is in Beta. For details on its capabilities and limitations, please refer to the README file.
+
 package ohos.security.permission_request_result
 
 import ohos.business_exception.BusinessException
@@ -24,8 +26,6 @@ const OUT_MEMORY_ERR: Int32 = 12100008
 
 /**
  * The result of requestPermissionsFromUser with asynchronous callback.
- *
- * @relation declare class PermissionRequestResult
  */
 @!APILevel[
     since: "22",
@@ -34,8 +34,6 @@ const OUT_MEMORY_ERR: Int32 = 12100008
 public class PermissionRequestResult {
     /**
     * The permissions passed in by the user.
-    *
-    * @relation permissions: Array<string>
     */
     @!APILevel[
         since: "22",
@@ -46,8 +44,6 @@ public class PermissionRequestResult {
     /**
     * The results for the corresponding request permissions. The value 0 indicates that a
     * permission is granted, the value -1 indicates not, and the value 2 indicates the request is invalid.
-    *
-    * @relation authResults: Array<int>
     */
     @!APILevel[
         since: "22",
@@ -58,8 +54,6 @@ public class PermissionRequestResult {
     /**
     * Specifies whether a dialog box is shown for each requested permission.
     * The value true means that a dialog box is shown, and false means the opposite.
-    *
-    * @relation dialogShownResults?: Array<boolean>
     */
     @!APILevel[
         since: "22",
