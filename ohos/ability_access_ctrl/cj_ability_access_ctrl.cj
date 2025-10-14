@@ -33,6 +33,8 @@ const OUT_MEMORY_ERR: Int32 = 12100008
 
 /**
  * Indicates permissions.
+ *
+ * @syscap SystemCapability.Security.AccessToken
  */
 public type Permissions = String
 
@@ -70,6 +72,7 @@ let ACCESS_LOG = HilogChannel(0, SECURITY_DOMAIN_ACCESSTOKEN, "CJ-AbilityAccessC
 
 /**
 * GrantStatus.
+*
 */
 @Derive[ToString, Equatable]
 @!APILevel[
@@ -79,6 +82,7 @@ let ACCESS_LOG = HilogChannel(0, SECURITY_DOMAIN_ACCESSTOKEN, "CJ-AbilityAccessC
 public enum GrantStatus {
     /**
      * access_token permission check fail
+     *
      */
     @!APILevel[
         since: "22",
@@ -88,6 +92,7 @@ public enum GrantStatus {
     | 
     /**
      * access_token permission check success
+     *
      */
     @!APILevel[
         since: "22",
@@ -107,6 +112,7 @@ public enum GrantStatus {
 
 /**
  * abilityAccessCtrl
+ *
  */
 @!APILevel[
     since: "22",
@@ -116,6 +122,8 @@ public class AbilityAccessCtrl {
     protected init() {}
     /**
      * Obtains the AtManager instance.
+     *
+     * @returns { AtManager } Returns the AtManager instance.
      */
     @!APILevel[
         since: "22",
@@ -128,6 +136,7 @@ public class AbilityAccessCtrl {
 
 /**
 * Provides methods for managing access_token.
+*
 */
 @!APILevel[
     since: "22",
@@ -138,14 +147,15 @@ public class AtManager {
     /**
      * Requests certain permissions from the user.
      *
-     * @param { Context } context - The context that initiates the permission request.
+     * @param { UIAbilityContext } context - The context that initiates the permission request. The context must belong
+     * to the Stage model and only supports UIAbilityContext and UIExtensionContext.
      * @param { Array<Permissions> } permissionList - Indicates the list of permissions to be requested. This parameter
-     *                                                cannot be null or empty.
-     * @param { PermissionRequestResult } requestCallback Callback for the result from requesting permissions.
-     * @throws { BusinessException } 401 - The parameter check failed.
-     * @throws { BusinessException } 12100001 - The parameter is invalid. The context is invalid when it does not
-     *                                          belong to the application itself.
-     * @throws { IllegalArgumentException } - The context is invalid.
+     * cannot be null or empty.
+     * @param { AsyncCallback<PermissionRequestResult> } requestCallback - Callback for the result from requesting
+     * permissions.
+     * @throws { BusinessException } 12100001 - Invalid parameter. The context is invalid when it does not belong to
+     * the application itself.
+     * @throws { BusinessException } 12100009 - Common inner error.
      */
     @!APILevel[
         since: "22",
@@ -155,7 +165,7 @@ public class AtManager {
         requestCallback: AsyncCallback<PermissionRequestResult>): Unit {
         let stageContext = getStageContext(context)
         if (stageContext.isNull()) {
-            throw IllegalArgumentException("The context is invalid.")
+            throw BusinessException(COMMON_INNER_ERROR, getErrorInfo(COMMON_INNER_ERROR))
         }
         unsafe {
             let cPermissionList = toArrayCString(permissionList)
@@ -185,15 +195,14 @@ public class AtManager {
 
     /**
      * Checks whether a specified application has been granted the given permission.
-     * On the cross-platform,
-     * this function can be used to check the permission grant status for the current application only.
+     * On the cross-platform, this function can be used to check the permission grant status for the current
+     * application only.
      *
      * @param { UInt32 } tokenID - Token ID of the application.
      * @param { Permissions } permissionName - Name of the permission to be verified.
      * @returns { GrantStatus } Returns permission verify result.
-     * @throws { BusinessException } 401 - The parameter check failed.
-     * @throws { BusinessException } 12100001 - The parameter is invalid. The tokenID is 0,
-     *                                          or the string size of permissionName is larger than 256.
+     * @throws { BusinessException } 12100001 - Invalid parameter. The tokenID is 0, or the permissionName exceeds 256
+     * characters.
      */
     @!APILevel[
         since: "22",
@@ -201,8 +210,8 @@ public class AtManager {
     ]
     public func checkAccessToken(tokenID: UInt32, permissionName: Permissions): GrantStatus {
         if (tokenID == 0) {
-            ACCESS_LOG.error(getErrorInfo(INVALID_PARA)) // The parameter is invalid.
-            throw BusinessException(INVALID_PARA, getErrorInfo(INVALID_PARA))
+            ACCESS_LOG.error(getErrorInfo(ACCESS_INVALID_PARAM)) // The parameter is invalid.
+            throw BusinessException(ACCESS_INVALID_PARAM, getErrorInfo(ACCESS_INVALID_PARAM))
         }
         unsafe {
             let cPermissionName = LibC.mallocCString(permissionName)

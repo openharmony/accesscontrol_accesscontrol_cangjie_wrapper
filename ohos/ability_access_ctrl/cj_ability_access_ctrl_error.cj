@@ -21,6 +21,9 @@ import ohos.business_exception.getUniversalErrorMsg
 
 import std.collection.HashMap
 
+const ACCESS_INVALID_PARAM: Int32 = 12100001
+const COMMON_INNER_ERROR: Int32 = 12100009
+
 let ERROR_CODE_MAP: HashMap<Int32, String> = HashMap<Int32, String>(
     (12100001, "The parameter is invalid."),
     (12100002, "The specified tokenID does not exist."),
