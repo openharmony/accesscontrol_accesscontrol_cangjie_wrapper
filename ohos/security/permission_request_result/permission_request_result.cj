@@ -63,7 +63,7 @@ public class PermissionRequestResult {
         since: "22",
         syscap: "SystemCapability.Security.AccessToken"
     ]
-    public var dialogShownResults = Array<Bool>()
+    public var dialogShownResults: Array<Bool> = Array<Bool>()
 
     protected init(
         permissions: Array<String>,
