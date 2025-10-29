@@ -21,10 +21,9 @@ import ohos.app.ability.ui_ability.{UIAbilityContext, getStageContext}
 import ohos.business_exception.{BusinessException, AsyncCallback}
 import ohos.ffi.{ CArrString, CArrUI32, Callback1Param, freeArrCString, toArrayCString}
 import std.deriving.Derive
-import ohos.ffi.*
 import ohos.hilog.HilogChannel
 public import ohos.security.permission_request_result.*
-import ohos.security.permission_request_result.*
+import ohos.security.permission_request_result.RetDataCPermissionRequestResult
 
 import ohos.labels.APILevel
 
