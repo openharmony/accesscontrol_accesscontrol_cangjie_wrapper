@@ -155,6 +155,7 @@ public class AtManager {
      * @throws { BusinessException } 12100001 - Invalid parameter. The context is invalid when it does not belong to
      * the application itself.
      * @throws { BusinessException } 12100009 - Common inner error.
+     * @throws { BusinessException } 12100008 - Malloc failed.
      */
     @!APILevel[
         since: "22",

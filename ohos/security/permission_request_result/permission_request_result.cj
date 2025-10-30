@@ -77,7 +77,7 @@ public class PermissionRequestResult {
         let pSize = cRet.permissions.size
         let pPtr = cRet.permissions.head
         if (pPtr.isNull()) {
-            throw BusinessException(OUT_MEMORY_ERR, "malloc failed!")
+            throw BusinessException(OUT_MEMORY_ERR, "Malloc failed!")
         }
         let permissionsArr = unsafe {
             Array<String>(
@@ -96,7 +96,7 @@ public class PermissionRequestResult {
         let cSize = cRet.authResults.size
         let cPtr = cRet.authResults.head
         if (cPtr.isNull()) {
-            throw BusinessException(OUT_MEMORY_ERR, "malloc failed!")
+            throw BusinessException(OUT_MEMORY_ERR, "Malloc failed!")
         }
         let autuResultsArr = unsafe { Array<Int32>(cSize, {i => cPtr.read(i)}) }
         unsafe { LibC.free<Int32>(cPtr) }
