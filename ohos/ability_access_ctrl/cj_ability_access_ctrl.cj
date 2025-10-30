@@ -75,7 +75,7 @@ let ACCESS_LOG = HilogChannel(0, SECURITY_DOMAIN_ACCESSTOKEN, "CJ-AbilityAccessC
 */
 @Derive[ToString, Equatable]
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Security.AccessToken"
 ]
 public enum GrantStatus {
@@ -84,7 +84,7 @@ public enum GrantStatus {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Security.AccessToken"
     ]
     PermissionDenied
@@ -94,7 +94,7 @@ public enum GrantStatus {
      *
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Security.AccessToken"
     ]
     PermissionGranted
@@ -114,7 +114,7 @@ public enum GrantStatus {
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Security.AccessToken"
 ]
 public class AbilityAccessCtrl {
@@ -125,7 +125,7 @@ public class AbilityAccessCtrl {
      * @returns { AtManager } Returns the AtManager instance.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Security.AccessToken"
     ]
     public static func createAtManager(): AtManager {
@@ -138,7 +138,7 @@ public class AbilityAccessCtrl {
 *
 */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Security.AccessToken"
 ]
 public class AtManager {
@@ -158,7 +158,7 @@ public class AtManager {
      * @throws { BusinessException } 12100008 - Malloc failed.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Security.AccessToken"
     ]
     public func requestPermissionsFromUser(context: UIAbilityContext, permissionList: Array<Permissions>,
@@ -205,7 +205,7 @@ public class AtManager {
      * characters.
      */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Security.AccessToken"
     ]
     public func checkAccessToken(tokenID: UInt32, permissionName: Permissions): GrantStatus {

@@ -29,7 +29,7 @@ const OUT_MEMORY_ERR: Int32 = 12100008
  *
  */
 @!APILevel[
-    22,
+    since: "22",
     syscap: "SystemCapability.Security.AccessToken"
 ]
 public class PermissionRequestResult {
@@ -38,7 +38,7 @@ public class PermissionRequestResult {
     *
     */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Security.AccessToken"
     ]
     public var permissions: Array<String>
@@ -49,7 +49,7 @@ public class PermissionRequestResult {
     *
     */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Security.AccessToken"
     ]
     public var authResults: Array<Int32>
@@ -60,7 +60,7 @@ public class PermissionRequestResult {
     *
     */
     @!APILevel[
-        22,
+        since: "22",
         syscap: "SystemCapability.Security.AccessToken"
     ]
     public var dialogShownResults: Array<Bool> = Array<Bool>()
