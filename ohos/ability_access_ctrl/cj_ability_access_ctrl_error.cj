@@ -24,24 +24,23 @@ import std.collection.HashMap
 const ACCESS_INVALID_PARAM: Int32 = 12100001
 const COMMON_INNER_ERROR: Int32 = 12100009
 
-let ERROR_CODE_MAP: HashMap<Int32, String> = HashMap<Int32, String>(
-    (12100001, "The parameter is invalid."),
-    (12100002, "The specified tokenID does not exist."),
-    (12100003, "The specified permission does not exist."),
-    (12100004, "The interface is not used together."),
-    (12100005, "The number of listeners exceeds the limit."),
-    (12100006,
-        "The application specified by the tokenID is not allowed to be granted with the specified permission. Either the application is a sandbox or the tokenID is from a remote device."),
-    (12100007, "Service is abnormal."),
-    (12100008, "Out of memory."),
-    (12100009, "Common inner error."),
-    (12100010, "The request already exists"),
-    (12100011, "All permissions in the permission list have been granted."),
-    (12100012, "The permission list contains the permission that has not been revoked by the user."),
-    (12100013, "The specific global switch is already open.")
-)
-
 func getErrorInfo(code: Int32): String {
+    static let ERROR_CODE_MAP: HashMap<Int32, String> = HashMap<Int32, String>(
+        (12100001, "The parameter is invalid."),
+        (12100002, "The specified tokenID does not exist."),
+        (12100003, "The specified permission does not exist."),
+        (12100004, "The interface is not used together."),
+        (12100005, "The number of listeners exceeds the limit."),
+        (12100006,
+            "The application specified by the tokenID is not allowed to be granted with the specified permission. Either the application is a sandbox or the tokenID is from a remote device."),
+        (12100007, "Service is abnormal."),
+        (12100008, "Out of memory."),
+        (12100009, "Common inner error."),
+        (12100010, "The request already exists"),
+        (12100011, "All permissions in the permission list have been granted."),
+        (12100012, "The permission list contains the permission that has not been revoked by the user."),
+        (12100013, "The specific global switch is already open.")
+    )
     if (let Some(v) <- getUniversalErrorMsg(code)) {
         return v
     } else if (ERROR_CODE_MAP.contains(code)) {
