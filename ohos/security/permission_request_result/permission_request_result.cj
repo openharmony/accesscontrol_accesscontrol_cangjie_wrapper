@@ -73,6 +73,9 @@ public class PermissionRequestResult {
         this.authResults = authResults
     }
 
+    /*
+     * @throws { BusinessException } 12100008 - Malloc failed!
+     */
     protected static func fromCPermissionRequestResult(cRet: CPermissionRequestResult): PermissionRequestResult {
         let pSize = cRet.permissions.size
         let pPtr = cRet.permissions.head
