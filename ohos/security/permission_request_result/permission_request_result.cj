@@ -19,7 +19,7 @@ package ohos.security.permission_request_result
 
 import ohos.business_exception.BusinessException
 import ohos.ffi.{ CArrString, CArrI32, CArrBool }
-import ohos.labels.APILevel
+import ohos.labels.{APILevel, Hide}
 
 const INVALID_PARA: Int32 = 12100001
 const OUT_MEMORY_ERR: Int32 = 12100008
@@ -64,6 +64,20 @@ public class PermissionRequestResult {
         syscap: "SystemCapability.Security.AccessToken"
     ]
     public var dialogShownResults: Array<Bool> = Array<Bool>()
+
+    /**
+    * Enumerates the return values of the permission request operation.
+    *   0  The operation is successful.
+    *   1  The permission name is invalid.
+    *   2  The requested permission has not been declared.
+    *   3  The conditions for requesting the permission are not met.
+    *   4  The user does not agree to the Privacy Statement.
+    *   5  The permission cannot be requested via a pop-up window.
+    *   6  The permission is a manual_settings permission and cannot be requested via a pop-up window.
+    *   12 The service is abnormal.
+    */
+    @!Hide
+    internal var errorReasons: Array<Int32> = Array<Int32>()
 
     protected init(
         permissions: Array<String>,
