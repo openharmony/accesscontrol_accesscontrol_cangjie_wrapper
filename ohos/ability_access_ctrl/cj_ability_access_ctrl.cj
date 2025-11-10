@@ -143,6 +143,35 @@ public class AbilityAccessCtrl {
 ]
 public class AtManager {
     protected init() {}
+
+    /**
+     * Checks whether a specified application has been granted the given permission.
+     * On the cross-platform, this function can be used to check the permission grant status for the current
+     * application only.
+     *
+     * @param { UInt32 } tokenID - Token ID of the application.
+     * @param { Permissions } permissionName - Name of the permission to be verified.
+     * @returns { GrantStatus } Returns permission verify result.
+     * @throws { BusinessException } 12100001 - Invalid parameter. The tokenID is 0, or the permissionName exceeds 256
+     * characters.
+     */
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Security.AccessToken"
+    ]
+    public func checkAccessToken(tokenID: UInt32, permissionName: Permissions): GrantStatus {
+        if (tokenID == 0) {
+            ACCESS_LOG.error(getErrorInfo(ACCESS_INVALID_PARAM)) // The parameter is invalid.
+            throw BusinessException(ACCESS_INVALID_PARAM, getErrorInfo(ACCESS_INVALID_PARAM))
+        }
+        unsafe {
+            let cPermissionName = LibC.mallocCString(permissionName)
+            let ret = FfiOHOSAbilityAccessCtrlCheckAccessTokenSync(tokenID, cPermissionName)
+            LibC.free(cPermissionName)
+            return GrantStatus.toGrantStatus(ret)
+        }
+    }
+    
     /**
      * Requests certain permissions from the user.
      *
@@ -190,34 +219,6 @@ public class AtManager {
             let lambdaData = Callback1Param<RetDataCPermissionRequestResult, Unit>(wrapper)
             FfiOHOSAbilityAccessCtrlRequestPermissionsFromUser(stageContext, cPermissionList, lambdaData.getID())
             freeArrCString(cPermissionList)
-        }
-    }
-
-    /**
-     * Checks whether a specified application has been granted the given permission.
-     * On the cross-platform, this function can be used to check the permission grant status for the current
-     * application only.
-     *
-     * @param { UInt32 } tokenID - Token ID of the application.
-     * @param { Permissions } permissionName - Name of the permission to be verified.
-     * @returns { GrantStatus } Returns permission verify result.
-     * @throws { BusinessException } 12100001 - Invalid parameter. The tokenID is 0, or the permissionName exceeds 256
-     * characters.
-     */
-    @!APILevel[
-        since: "22",
-        syscap: "SystemCapability.Security.AccessToken"
-    ]
-    public func checkAccessToken(tokenID: UInt32, permissionName: Permissions): GrantStatus {
-        if (tokenID == 0) {
-            ACCESS_LOG.error(getErrorInfo(ACCESS_INVALID_PARAM)) // The parameter is invalid.
-            throw BusinessException(ACCESS_INVALID_PARAM, getErrorInfo(ACCESS_INVALID_PARAM))
-        }
-        unsafe {
-            let cPermissionName = LibC.mallocCString(permissionName)
-            let ret = FfiOHOSAbilityAccessCtrlCheckAccessTokenSync(tokenID, cPermissionName)
-            LibC.free(cPermissionName)
-            return GrantStatus.toGrantStatus(ret)
         }
     }
 }
