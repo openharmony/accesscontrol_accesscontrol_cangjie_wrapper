@@ -70,9 +70,8 @@ const SECURITY_DOMAIN_ACCESSTOKEN: UInt32 = 0xD005A01
 let ACCESS_LOG = HilogChannel(0, SECURITY_DOMAIN_ACCESSTOKEN, "CJ-AbilityAccessCtrl")
 
 /**
-* GrantStatus.
-*
-*/
+ * GrantStatus.
+ */
 @Derive[ToString, Equatable]
 @!APILevel[
     since: "22",
@@ -81,7 +80,6 @@ let ACCESS_LOG = HilogChannel(0, SECURITY_DOMAIN_ACCESSTOKEN, "CJ-AbilityAccessC
 public enum GrantStatus {
     /**
      * access_token permission check fail
-     *
      */
     @!APILevel[
         since: "22",
@@ -91,7 +89,6 @@ public enum GrantStatus {
     | 
     /**
      * access_token permission check success
-     *
      */
     @!APILevel[
         since: "22",
@@ -111,7 +108,6 @@ public enum GrantStatus {
 
 /**
  * abilityAccessCtrl
- *
  */
 @!APILevel[
     since: "22",
@@ -122,7 +118,7 @@ public class AbilityAccessCtrl {
     /**
      * Obtains the AtManager instance.
      *
-     * @returns { AtManager } Returns the AtManager instance.
+     * @returns { AtManager } Returns the instance of the AtManager.
      */
     @!APILevel[
         since: "22",
@@ -134,9 +130,8 @@ public class AbilityAccessCtrl {
 }
 
 /**
-* Provides methods for managing access_token.
-*
-*/
+ * Provides methods for managing access_token.
+ */
 @!APILevel[
     since: "22",
     syscap: "SystemCapability.Security.AccessToken"
@@ -157,7 +152,8 @@ public class AtManager {
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Security.AccessToken"
+        syscap: "SystemCapability.Security.AccessToken",
+        throwexception: true
     ]
     public func checkAccessToken(tokenID: UInt32, permissionName: Permissions): GrantStatus {
         if (tokenID == 0) {
@@ -175,20 +171,19 @@ public class AtManager {
     /**
      * Requests certain permissions from the user.
      *
-     * @param { UIAbilityContext } context - The context that initiates the permission request. The context must belong
-     * to the Stage model and only supports UIAbilityContext and UIExtensionContext.
+     * @param { UIAbilityContext } context - The context that initiates the permission request.
+     * The context must belong to the Stage model and only supports UIAbilityContext and UIExtensionContext.
      * @param { Array<Permissions> } permissionList - Indicates the list of permissions to be requested. This parameter
      * cannot be null or empty.
      * @param { AsyncCallback<PermissionRequestResult> } requestCallback - Callback for the result from requesting
      * permissions.
      * @throws { BusinessException } 12100001 - Invalid parameter. The context is invalid when it does not belong to
      * the application itself.
-     * @throws { BusinessException } 12100009 - Common inner error.
-     * @throws { BusinessException } 12100008 - Malloc failed.
      */
     @!APILevel[
         since: "22",
-        syscap: "SystemCapability.Security.AccessToken"
+        syscap: "SystemCapability.Security.AccessToken",
+        throwexception: true
     ]
     public func requestPermissionsFromUser(context: UIAbilityContext, permissionList: Array<Permissions>,
         requestCallback: AsyncCallback<PermissionRequestResult>): Unit {
