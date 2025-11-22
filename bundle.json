@@ -39,6 +39,9 @@
         "inner_api": [
           {
             "name": "//base/accesscontrol/accesscontrol_cangjie_wrapper/ohos/ability_access_ctrl:ohos.ability_access_ctrl"
+          },
+          {
+            "name": "//base/accesscontrol/accesscontrol_cangjie_wrapper:copy_sdk_accesscontrol_cangjie_libs"
           }
         ],
         "test": [
