@@ -12,9 +12,7 @@
     "component": {
       "name": "accesscontrol_cangjie_wrapper",
       "subsystem": "accesscontrol",
-      "syscap": [
-        "SystemCapability.Security.AccessToken"
-      ],
+      "syscap": [],
       "features": [],
       "adapted_system_type": [
           "standard"
