@@ -268,7 +268,8 @@ public class AtManager {
     @!APILevel[
         since: "24",
         syscap: "SystemCapability.Security.AccessToken",
-        throwexception: true
+        throwexception: true,
+        workerthread: true
     ]
     public func requestPermissionOnSetting(context: UIAbilityContext, permissionList: Array<Permissions>): Array<GrantStatus> {
         let count = SyncCounter(1)
