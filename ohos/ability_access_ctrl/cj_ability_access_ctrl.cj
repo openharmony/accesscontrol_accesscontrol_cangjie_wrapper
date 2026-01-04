@@ -254,16 +254,22 @@ public class AtManager {
      * Requests certain permissions on setting from the user.
      *
      * @param { UIAbilityContext } context - The context that initiates the permission request.
-     * The context must belong to the Stage model and only supports UIAbilityContext.
-     * @param { Array<Permissions> } permissionList - Indicates the list of permission to be requested. This parameter cannot be null or empty.
-     * @returns { Array<GrantStatus> } Return for the result from requesting permissions.
-     * @throws { BusinessException } 12100001 - Invalid parameter. Possible causes: 1. The context is invalid because it does not belong to the application itself;
-     *  2. The permission list contains the permission that is not declared in the module.json file; 3. The permission list is invalid because the permissions in it do not belong to the same permission group.
-     * @throws { BusinessException } 12100009 - Common inner error. An error occurs when creating the pop-up window or obtaining user operation result.
-     * @throws { BusinessException } 12100010 - The request already exists.
+     *     The context must belong to the Stage model and only supports UIAbilityContext.
+     * @param { Array<Permissions> } permissionList - Indicates the list of permission to be requested. This
+     *     parameter cannot be null or empty.
+     * @returns { Array<GrantStatus> } Returns the list of status of the specified permission.
+     * @throws { BusinessException } 12100001 - Invalid parameter. Possible causes: 1. The context is invalid
+     *     because it does not belong to the application itself; 2. The permission list contains the permission that is
+     *     not declared in the module.json file; 3. The permission list is invalid because the permissions in it
+     *     do not belong to the same permission group; 4. The permission list contains one or more system_grant
+     *     permissions.
+     * @throws { BusinessException } 12100009 - Common inner error. An error occurs when creating the pop-up window
+     *     or obtaining user operation result.
      * @throws { BusinessException } 12100011 - All permissions in the permission list have been granted.
-     * @throws { BusinessException } 12100012 - The permission list contains the permission that has not been revoked by the user.
-     * @throws { BusinessException } 12100014 - Unexpected permission. You cannot request this type of permission from users via a pop-up window.
+     * @throws { BusinessException } 12100012 - The permission list contains the permission that has not been
+     *     revoked by the user.
+     * @throws { BusinessException } 12100014 - Unexpected permission. You cannot request this type of permission
+     *     from users via a pop-up window.
      */
     @!APILevel[
         since: "24",
