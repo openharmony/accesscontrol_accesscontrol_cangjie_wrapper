@@ -255,8 +255,7 @@ public class AtManager {
      *
      * @param { UIAbilityContext } context - The context that initiates the permission request.
      *     The context must belong to the Stage model and only supports UIAbilityContext.
-     * @param { Array<Permissions> } permissionList - Indicates the list of permission to be requested. This
-     *     parameter cannot be null or empty.
+     * @param { Array<Permissions> } permissionList - Indicates the list of permission to be requested.
      * @returns { Array<GrantStatus> } Returns the list of status of the specified permission.
      * @throws { BusinessException } 12100001 - Invalid parameter. Possible causes: 1. The context is invalid
      *     because it does not belong to the application itself; 2. The permission list contains the permission that is
