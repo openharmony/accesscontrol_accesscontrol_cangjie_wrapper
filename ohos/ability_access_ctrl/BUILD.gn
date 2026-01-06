@@ -16,10 +16,15 @@
 import("//build/templates/cangjie/cjc.gni")
 
 ohos_cangjie_shared_library("ohos.ability_access_ctrl") {
-  sources = [
-    "cj_ability_access_ctrl.cj",
-    "cj_ability_access_ctrl_error.cj",
-  ]
+  
+  if (is_mingw || is_mac){
+    sources = [ "../../mock/ohos.ability_access_ctrl.cj" ]
+  } else {
+    sources = [
+      "cj_ability_access_ctrl.cj",
+      "cj_ability_access_ctrl_error.cj",
+    ]
+  }
 
   cj_deps = [ "../security/permission_request_result:ohos.security.permission_request_result" ]
 
