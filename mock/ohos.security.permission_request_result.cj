@@ -17,15 +17,27 @@ package ohos.security.permission_request_result
 
 import ohos.labels.APILevel
 
-@!APILevel[since: "22", syscap: "SystemCapability.Security.AccessToken"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Security.AccessToken"
+]
 public class PermissionRequestResult {
-    @!APILevel[since: "22", syscap: "SystemCapability.Security.AccessToken"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Security.AccessToken"
+    ]
     public var permissions: Array<String>
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Security.AccessToken"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Security.AccessToken"
+    ]
     public var authResults: Array<Int32>
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Security.AccessToken"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Security.AccessToken"
+    ]
     public var dialogShownResults = Array<Bool>()
     
     public init() {
