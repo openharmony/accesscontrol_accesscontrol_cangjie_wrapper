@@ -23,37 +23,62 @@ import ohos.security.permission_request_result.*
 
 public type Permissions = String
 
-@!APILevel[since: "22", syscap: "SystemCapability.Security.AccessToken"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Security.AccessToken"
+]
 public enum GrantStatus {
-    @!APILevel[since: "22", syscap: "SystemCapability.Security.AccessToken"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Security.AccessToken"
+    ]
     PermissionDenied
-    | @!APILevel[since: "22", syscap: "SystemCapability.Security.AccessToken"]
+    |
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Security.AccessToken"
+    ]
     PermissionGranted
     | ...
 }
 
 extend GrantStatus <: ToString {
-    @!APILevel[since: "22", syscap: "SystemCapability.Security.AccessToken"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Security.AccessToken"
+    ]
     public func toString(): String {
         return String()
     }
 }
 
 extend GrantStatus <: Equatable<GrantStatus> {
-    @!APILevel[since: "22", syscap: "SystemCapability.Security.AccessToken"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Security.AccessToken"
+    ]
     public operator func ==(other: GrantStatus): Bool {
         return true
     }
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Security.AccessToken"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Security.AccessToken"
+    ]
     public operator func !=(other: GrantStatus): Bool {
         return true
     }
 }
 
-@!APILevel[since: "22", syscap: "SystemCapability.Security.AccessToken"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Security.AccessToken"
+]
 public class AbilityAccessCtrl {
-    @!APILevel[since: "22", syscap: "SystemCapability.Security.AccessToken"]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Security.AccessToken"
+    ]
     public static func createAtManager(): AtManager {
         return AtManager()
     }
@@ -63,14 +88,25 @@ public class AbilityAccessCtrl {
     }
 }
 
-@!APILevel[since: "22", syscap: "SystemCapability.Security.AccessToken"]
+@!APILevel[
+    since: "22",
+    syscap: "SystemCapability.Security.AccessToken"
+]
 public class AtManager {
-    @!APILevel[since: "22", syscap: "SystemCapability.Security.AccessToken", throwexception: true]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Security.AccessToken",
+        throwexception: true
+    ]
     public func checkAccessToken(tokenID: UInt32, permissionName: Permissions): GrantStatus {
         return GrantStatus.PermissionDenied
     }
 
-    @!APILevel[since: "22", syscap: "SystemCapability.Security.AccessToken", throwexception: true]
+    @!APILevel[
+        since: "22",
+        syscap: "SystemCapability.Security.AccessToken",
+        throwexception: true
+    ]
     public func requestPermissionsFromUser(context: UIAbilityContext, permissionList: Array<Permissions>,
         requestCallback: AsyncCallback<PermissionRequestResult>): Unit {
         return ()
