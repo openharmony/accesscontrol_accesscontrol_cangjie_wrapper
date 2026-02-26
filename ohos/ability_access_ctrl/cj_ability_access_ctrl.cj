@@ -19,11 +19,12 @@ package ohos.ability_access_ctrl
 
 import ohos.app.ability.ui_ability.{UIAbilityContext, getStageContext}
 import ohos.business_exception.{BusinessException, AsyncCallback}
-import ohos.ffi.{ CArrString, CArrUI32, Callback1Param, freeArrCString, toArrayCString}
+import ohos.ffi.{ CArrString, CArrUI32, Callback1Param, freeArrCString, toArrayCString, RetDataCArrI32}
 import std.deriving.Derive
 import ohos.hilog.HilogChannel
 public import ohos.security.permission_request_result.*
 import ohos.security.permission_request_result.RetDataCPermissionRequestResult
+import std.sync.SyncCounter
 
 import ohos.labels.APILevel
 
@@ -215,5 +216,81 @@ public class AtManager {
             FfiOHOSAbilityAccessCtrlRequestPermissionsFromUser(stageContext, cPermissionList, lambdaData.getID())
             freeArrCString(cPermissionList)
         }
+    }
+
+    func requestPermissionOnSetting(context: UIAbilityContext, permissionList: Array<Permissions>,
+        callback: AsyncCallback<Array<GrantStatus>>): Unit {
+        let abilityContext = context as UIAbilityContext
+        if (abilityContext.isNone()) {
+            throw BusinessException(INVALID_PARA, getErrorInfo(INVALID_PARA))
+        }
+        let stageContext: StageContext = getStageContext(abilityContext.getOrThrow())
+        if (stageContext.isNull()) {
+            throw BusinessException(INVALID_PARA, getErrorInfo(INVALID_PARA))
+        }
+        unsafe {
+            let cPermissionList = toArrayCString(permissionList)
+            let wrapper = {
+                value: RetDataCArrI32 => if (value.code == 0) {
+                    let cSize = value.data.size
+                    let cPtr = value.data.head
+                    if (cPtr.isNull()) {
+                        throw BusinessException(OUT_MEMORY_ERR, "malloc failed!")
+                    }
+                    let grantStatusArr = Array<GrantStatus>(cSize, {i => GrantStatus.toGrantStatus(cPtr.read(i))})
+                    LibC.free<Int32>(cPtr)
+                    callback(None, grantStatusArr)
+                } else {
+                    callback(BusinessException(value.code, getErrorInfo(value.code)), None)
+                }
+            }
+            let lambdaData = Callback1Param<RetDataCArrI32, Unit>(wrapper)
+            FfiOHOSAbilityAccessCtrlRequestPermissionOnSetting(stageContext, cPermissionList, lambdaData.getID())
+            freeArrCString(cPermissionList)
+        }
+    }
+
+    /**
+     * Requests certain permissions on setting from the user.
+     *
+     * @param { UIAbilityContext } context - The context that initiates the permission request.
+     *     The context must belong to the Stage model and only supports UIAbilityContext.
+     * @param { Array<Permissions> } permissionList - Indicates the list of permission to be requested.
+     * @returns { Array<GrantStatus> } Returns the list of status of the specified permission.
+     * @throws { BusinessException } 12100001 - Invalid parameter. Possible causes: 1. The context is invalid
+     *     because it does not belong to the application itself; 2. The permission list contains the permission that is
+     *     not declared in the module.json file; 3. The permission list is invalid because the permissions in it
+     *     do not belong to the same permission group; 4. The permission list contains one or more system_grant
+     *     permissions.
+     * @throws { BusinessException } 12100009 - Common inner error. An error occurs when creating the pop-up window
+     *     or obtaining user operation result.
+     * @throws { BusinessException } 12100011 - All permissions in the permission list have been granted.
+     * @throws { BusinessException } 12100012 - The permission list contains the permission that has not been
+     *     revoked by the user.
+     * @throws { BusinessException } 12100014 - Unexpected permission. You cannot request this type of permission
+     *     from users via a pop-up window.
+     */
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Security.AccessToken",
+        throwexception: true,
+        workerthread: true
+    ]
+    public func requestPermissionOnSetting(context: UIAbilityContext, permissionList: Array<Permissions>): Array<GrantStatus> {
+        let count = SyncCounter(1)
+        let ret = Box<?Array<GrantStatus>>(None)
+        spawn {
+            requestPermissionOnSetting(context, permissionList, {
+                errcode: Option<BusinessException>, data: Option<Array<GrantStatus>> =>
+                    match(errcode) {
+                        case Some(v) => throw BusinessException(v.code, getErrorInfo(v.code))
+                        case _ => ret.value = data
+                    }
+                    count.dec()
+            })
+        }
+
+        count.waitUntilZero()
+        return ret.value.getOrThrow()
     }
 }
