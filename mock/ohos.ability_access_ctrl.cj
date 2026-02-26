@@ -111,7 +111,17 @@ public class AtManager {
         requestCallback: AsyncCallback<PermissionRequestResult>): Unit {
         return ()
     }
-    
+
+    @!APILevel[
+        since: "24",
+        syscap: "SystemCapability.Security.AccessToken",
+        throwexception: true,
+        workerthread: true
+    ]
+    public func requestPermissionOnSetting(context: UIAbilityContext, permissionList: Array<Permissions>): Array<GrantStatus> {
+        return Array<GrantStatus>()
+    }
+
     public init() {
         super()
     }
