@@ -72,7 +72,7 @@ public class PermissionRequestResult {
     *   6  The permission is a manual_settings permission and cannot be requested via a pop-up window.
     *   12 The service is abnormal.
     */
-    @!Hide
+    @!Hide[isChecked: true]
     internal var errorReasons: Array<Int32> = Array<Int32>()
 
     protected init(
