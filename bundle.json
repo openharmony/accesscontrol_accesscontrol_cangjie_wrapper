@@ -34,7 +34,7 @@
             "//base/accesscontrol/accesscontrol_cangjie_wrapper/ohos/ability_access_ctrl:ohos.ability_access_ctrl",
             "//base/accesscontrol/accesscontrol_cangjie_wrapper/ohos/security/permission_request_result:ohos.security.permission_request_result"
         ],
-        "inner_api": [
+        "inner_kits": [
           {
             "name": "//base/accesscontrol/accesscontrol_cangjie_wrapper/ohos/ability_access_ctrl:ohos.ability_access_ctrl"
           },
