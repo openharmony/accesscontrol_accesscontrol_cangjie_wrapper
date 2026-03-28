@@ -19,4 +19,6 @@ let _ = testsuite()
 
 func testsuite(): Unit {
     registerTestSuite("Test_ability_access_ctrl", {=> Test_ability_access_ctrl()})
+    registerTestSuite("TestAbilityAccessCtrlLlt", {=> TestAbilityAccessCtrlLlt()})
+    registerTestSuite("TestPermissionRequestResultLlt", {=> TestPermissionRequestResultLlt()})
 }
